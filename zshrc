@@ -4,7 +4,7 @@ export GTK2_RC_FILES=$HOME/.config/gtkrc-2.0
 # needed for ruby executables to run
 export PATH="/home/mark/.gem/ruby/2.2.0/bin:$PATH"
 
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
 
 # for java dependencies
 source /etc/profile.d/jre.sh
@@ -21,6 +21,11 @@ setopt interactivecomments
 setopt CORRECT
 
 setopt NO_HUP
+
+ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+	mkdir $ZSH_CACHE_DIR
+fi
 
 source $ZSH/oh-my-zsh.sh
 
