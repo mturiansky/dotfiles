@@ -1,0 +1,19 @@
+#!/bin/sh
+
+export GTK2_RC_FILES=$HOME/.config/gtkrc-2.0
+
+sxhkd &
+urxvtd -q -f -o &
+xsetroot -cursor_name left_ptr &
+compton &
+
+if [ "$(xrandr | grep HDMI1 | awk '{print $2}')" = "connected" ]; then
+	xrandr --output LVDS1 --auto
+	xrandr --output HDMI1 --auto --left-of LVDS1 --primary
+else
+	xrandr --output LVDS1 --auto --primary
+	xrandr --output HDMI1 --off
+fi
+
+sh .fehbg &
+# exec bspwm
