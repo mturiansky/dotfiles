@@ -1,0 +1,67 @@
+#!/bin/sh
+
+if [[ $(pgrep -cx panel) -gt 1 ]]; then
+    printf "The panel is already running.\n" >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "/tmp/panelfifo" ] && rm "/tmp/panelfifo"
+mkfifo "/tmp/panelfifo"
+
+while true; do
+    echo -e "TIME$(date +"%_H:%M")"
+    sleep 10
+done > "/tmp/panelfifo" &
+
+while true; do
+    echo -e "DAY$(date +'%a, %b %_d')"
+    sleep 60
+done > "/tmp/panelfifo" &
+
+while true; do
+    BATT_LEVEL=$(acpi -b | grep -o '[[:digit:]]\+%' | sed 's/%//')
+    echo -e "BATT${BATT_LEVEL}"
+    sleep 2
+done > "/tmp/panelfifo" &
+
+while true; do
+    WIFI=$(ip addr show wlp0s20u3 | grep "inet " | awk '{print $2}')
+    echo -e "WIFI${WIFI}"
+    sleep 3
+done > "/tmp/panelfifo" &
+
+# this is handled by acpid
+# while true; do
+#     BRIGHT=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+#     echo -e "BRIGHT${BRIGHT}"
+#     sleep 2
+# done > "/tmp/panelfifo" &
+
+# just need to call it once
+BRIGHT=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+echo -e "BRIGHT${BRIGHT}" > "/tmp/panelfifo" &
+
+echo -e "VOL" > "/tmp/panelfifo" &
+
+# bspc control --subscribe > "/tmp/panelfifo" &
+bspc subscribe report > "/tmp/panelfifo" &
+
+xtitle -sf 'TITLE%s' > "/tmp/panelfifo" &
+
+WIDTH=$(xrandr | grep primary | awk '{print $4}' | awk -Fx '{print $1}')
+width=$(expr $WIDTH - 24)
+
+/home/mark/.panel/panel_bar < "/tmp/panelfifo" | lemonbar \
+    -g ${width}x25+12+10 \
+    -f "-*-terminus-*-*-*-*-*-*-*-*-*-*-*-*" \
+    -f "FontAwesome-8" \
+    -F "#FFFFFF" \
+    -B "#000000" \
+    -u 2 \
+    | zsh &
+
+wait
+
+# -f "-*-fontawesome-*-*-*-*-10-*-*-*-*-*-*-*" \

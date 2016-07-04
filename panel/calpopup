@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ $(pgrep -cx dzen2) -lt 1 ];
+then
+	cal | dzen2 -p -bg "#aa1111" -fg white -fn terminus:size=10 -l 6 -ta c -x 1190 -y 35 -w 164 -sa c -e 'onstart=uncollapse;button1=exit' &
+fi

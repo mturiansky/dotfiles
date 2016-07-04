@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# ISACT=0
+
+unfuck () {
+    fst=$(echo $1 | head -c 1)
+    dsk=${1#?}
+    # if [ $ISACT -eq 0 ] && [ "$fst" = "O" ]; then
+	# fst="o"
+    # elif [ $ISACT -eq 0 ] && [ "$fst" = "F" ]; then
+	# fst="f"
+    # fi	
+    case "$fst" in
+	M)
+	    ISACT=1
+	    ;;
+	m)
+	    ISACT=0
+	    ;;
+        O)
+            # echo -e "%{F-}%{B"#aa1111"} \uf111 %{B-}"
+            echo -e "%{F-}%{B"#aa1111"} ${dsk} %{B-}"
+            ;;
+        F)
+            # echo -e "%{F-}%{B"#aa1111"} \uf10c %{B-}"
+            echo -e "%{F-}%{B"#aa1111"} ${dsk} %{B-}"
+            ;;
+        o)
+            # echo -e "%{A:bspc desktop -f ${dsk}:}%{F"#aa1111"}%{B"#808080"} \uf111 %{B-}%{F-}%{A}"
+            echo -e "%{A:bspc desktop -f ${dsk}:}%{F"#aa1111"}%{B"#606060"} ${dsk} %{B-}%{F-}%{A}"
+            ;;
+        f)
+            # echo -e "%{A:bspc desktop -f ${dsk}:}%{F"#aa1111"}%{B"#808080"} \uf10c %{B-}%{F-}%{A}"
+            echo -e "%{A:bspc desktop -f ${dsk}:}%{F"#aa1111"}%{B"#808080"} ${dsk} %{B-}%{F-}%{A}"
+            ;;
+    esac
+}
+
+while read -r line; do
+    case $line in
+        DAY*)
+            date=" ${line#???} "
+            ;;
+        TIME*)
+            time=" ${line#????} "
+            ;;
+        BATT*)
+            lvl=${line#????}
+            acadap=$(acpi -a | awk '{print $3}')
+            if [ "$acadap" == "on-line" ]; then
+                battery=" ${lvl} \uf0e7 "
+            elif [ $lvl -gt 90 ]; then
+                battery=" ${lvl} \uf240 "
+            elif [ $lvl -gt 65 ]; then
+                battery=" ${lvl} \uf241 "
+            elif [ $lvl -gt 40 ]; then
+                battery=" ${lvl} \uf242 "
+            elif [ $lvl -gt 15 ]; then
+                battery=" ${lvl} \uf243 "
+            else
+                battery=" ${lvl} \uf244 "
+            fi
+            ;;
+        TITLE*)
+            tmp=${line#?????}
+            tmp2=$(echo $tmp | cut -c 1-50)
+            if [ "$tmp" != "$tmp2" ]; then
+                title=" $tmp2... "
+            else
+                title=" $tmp "
+            fi
+            ;;
+        BRIGHT*)
+            BR=${line#??????}
+            BRI=$(expr $BR / 10)
+            bright=" ${BRI} \uf185 "
+            ;;
+        VOL)
+            pct=$(amixer get Master | tail -n 1 | awk '{print $4}')
+            pct=${pct#?}
+            pct=${pct%??}
+            mute=$(amixer get Master | tail -n 1 | awk '{print $6}')
+            mute=${mute#?}
+            mute=${mute%?}
+            if [ "$mute" == "off" ]; then
+                volume=" 0 \uf026 "
+            elif [ $pct -gt 50 ]; then
+                volume=" ${pct} \uf028 "
+            else
+                volume=" ${pct} \uf027 "
+            fi
+            ;;
+        WIFI*)
+            wi=${line#????}
+            wi=$(echo $wi | awk -F/ '{print $1}')
+            if [ "${wi}" != "" ]; then
+                wifi=" ${wi} \uf1eb "
+            else
+                wifi=" down \uf1eb "
+            fi
+            ;;
+	W*)
+	    desk=''
+	    to_unfuck=${line#?}
+	    while [ "$to_unfuck" != "::::::::::::" ]
+	    do
+		to_ununfuck=$(echo $to_unfuck | awk -F: '{print $1}')
+		desk=${desk}$(unfuck $to_ununfuck)
+		to_unfuck=$(echo $to_unfuck | awk -F: '{print $2":"$3":"$4":"$5":"$6":"$7":"$8":"$9":"$10":"$11":"$12":"$13":"$14}')
+	    done
+	    ;;
+    esac
+    echo -e "%{l}${desk}%{A:#:}%{A}${title}%{r}${wifi}${volume}${bright}${battery}%{B"#aa1111"}%{A:sh /home/mark/.panel/calpopup:}${date}${time}%{A}%{B-}"
+done
