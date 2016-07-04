@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --bg-fill '/home/mark/Downloads/red2.jpg' 
