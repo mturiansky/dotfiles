@@ -32,6 +32,14 @@ while true; do
     sleep 3
 done > "/tmp/panelfifo" &
 
+# while true; do
+#     sleep 60
+#     UPDATES=$(checkupdates | wc -l)
+#     echo -e "UPDATES${UPDATES}"
+# done > "/tmp/panelfifo" &
+
+(sleep 5 && echo -e "UPDATES$(checkupdates | wc -l)") > "/tmp/panelfifo" &
+
 # this is handled by acpid
 # while true; do
 #     BRIGHT=$(cat /sys/class/backlight/intel_backlight/actual_brightness)

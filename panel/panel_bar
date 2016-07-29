@@ -9,7 +9,7 @@ unfuck () {
 	# fst="o"
     # elif [ $ISACT -eq 0 ] && [ "$fst" = "F" ]; then
 	# fst="f"
-    # fi	
+    # fi
     case "$fst" in
 	M)
 	    ISACT=1
@@ -43,6 +43,9 @@ while read -r line; do
             ;;
         TIME*)
             time=" ${line#????} "
+            ;;
+        UPDATES*)
+            updates=" ${line#???????} \uf0aa "
             ;;
         BATT*)
             lvl=${line#????}
@@ -99,16 +102,16 @@ while read -r line; do
                 wifi=" down \uf1eb "
             fi
             ;;
-	W*)
-	    desk=''
-	    to_unfuck=${line#?}
-	    while [ "$to_unfuck" != "::::::::::::" ]
-	    do
-		to_ununfuck=$(echo $to_unfuck | awk -F: '{print $1}')
-		desk=${desk}$(unfuck $to_ununfuck)
-		to_unfuck=$(echo $to_unfuck | awk -F: '{print $2":"$3":"$4":"$5":"$6":"$7":"$8":"$9":"$10":"$11":"$12":"$13":"$14}')
-	    done
-	    ;;
+    	W*)
+    	    desk=''
+    	    to_unfuck=${line#?}
+    	    while [ "$to_unfuck" != "::::::::::::" ]
+    	    do
+    		to_ununfuck=$(echo $to_unfuck | awk -F: '{print $1}')
+    		desk=${desk}$(unfuck $to_ununfuck)
+    		to_unfuck=$(echo $to_unfuck | awk -F: '{print $2":"$3":"$4":"$5":"$6":"$7":"$8":"$9":"$10":"$11":"$12":"$13":"$14}')
+    	    done
+    	    ;;
     esac
-    echo -e "%{l}${desk}%{A:#:}%{A}${title}%{r}${wifi}${volume}${bright}${battery}%{B"#aa1111"}%{A:sh /home/mark/.panel/calpopup:}${date}${time}%{A}%{B-}"
+    echo -e "%{l}${desk}%{A:#:}%{A}${title}%{r}${updates}${wifi}${volume}${bright}${battery}%{B"#aa1111"}%{A:sh /home/mark/.panel/calpopup:}${date}${time}%{A}%{B-}"
 done
