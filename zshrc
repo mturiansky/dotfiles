@@ -46,5 +46,3 @@ tga () {
 
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
-
-alias vncviewer="chromium --app-id=iabmpiboiopbgfabjmge"
