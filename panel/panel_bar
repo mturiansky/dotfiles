@@ -47,6 +47,9 @@ while read -r line; do
         UPDATES*)
             updates=" ${line#???????} \uf0aa "
             ;;
+        PRINT*)
+            print=" ${line#?????} \uf02f "
+            ;;
         BATT*)
             lvl=${line#????}
             acadap=$(acpi -a | awk '{print $3}')
@@ -113,5 +116,5 @@ while read -r line; do
     	    done
     	    ;;
     esac
-    echo -e "%{l}${desk}%{A:#:}%{A}${title}%{r}${updates}${wifi}${volume}${bright}${battery}%{B"#aa1111"}%{A:sh /home/mark/.panel/calpopup:}${date}${time}%{A}%{B-}"
+    echo -e "%{l}${desk}%{A:#:}%{A}${title}%{r}${updates}${print}${wifi}${volume}${bright}${battery}%{B"#aa1111"}%{A:sh /home/mark/.panel/calpopup:}${date}${time}%{A}%{B-}"
 done

@@ -32,11 +32,11 @@ while true; do
     sleep 3
 done > "/tmp/panelfifo" &
 
-# while true; do
-#     sleep 60
-#     UPDATES=$(checkupdates | wc -l)
-#     echo -e "UPDATES${UPDATES}"
-# done > "/tmp/panelfifo" &
+while true; do
+    PRINTQ=$(lpstat -u | wc -l)
+    echo -e "PRINT${PRINTQ}"
+    sleep 1
+done > "/tmp/panelfifo" &
 
 (sleep 5 && echo -e "UPDATES$(checkupdates | wc -l)") > "/tmp/panelfifo" &
 
