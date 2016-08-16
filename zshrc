@@ -51,13 +51,37 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/NewCode
 source /usr/bin/virtualenvwrapper.sh
 
-# homemade functions
+# HOMEMADE FUNCTIONS
+
+# touch and git add
 tga () {
 	touch $1
 	git add $1
 }
 
-# homemade aliases
+## stolen from http://dotshare.it/dots/461/
+extract () {
+  if [ -f $1 ] ; then
+      case $1 in
+          *.tar.bz2)   tar xvjf $1    ;;
+          *.tar.gz)    tar xvzf $1    ;;
+          *.bz2)       bunzip2 $1     ;;
+          *.rar)       rar x $1       ;;
+          *.gz)        gunzip $1      ;;
+          *.tar)       tar xvf $1     ;;
+          *.tbz2)      tar xvjf $1    ;;
+          *.tgz)       tar xvzf $1    ;;
+          *.zip)       unzip $1       ;;
+          *.Z)         uncompress $1  ;;
+          *.7z)        7z x $1        ;;
+          *)           echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not an extractable file."
+  fi
+}
+
+# HOMEMADE ALIASES
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
