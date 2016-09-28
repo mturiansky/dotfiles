@@ -40,5 +40,5 @@ bspc rule -a Gimp state=floating
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
 
-exec xautolock -time 15 -locker 'i3lock-wrapper' &
+exec xautolock -time 15 -locker 'dm-tool lock' &
 /home/mark/.panel/panel &
