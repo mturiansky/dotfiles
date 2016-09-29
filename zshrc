@@ -13,7 +13,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=()
 
 # add ruby to path
-export PATH="/home/mark/.gem/ruby/2.2.0/bin:$PATH"
+export PATH="$PATH:/home/mark/.gem/ruby/2.2.0/bin"
 
 # change cache dir for oh-my-zsh
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
