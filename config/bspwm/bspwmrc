@@ -1,6 +1,6 @@
 #! /bin/sh
 
-#bspc config top_padding 40
+# bspc config top_padding 40
 bspc config top_padding 35
 
 bspc config border_width        2
@@ -22,8 +22,8 @@ bspc config active_border_color \#aa1111
 # unfocused window
 # bspc config normal_border_color \#000000
 
-#bspc monitor -d I II III IV V VI VII VIII IX X
-#bspc monitor -d I II III IV V
+# bspc monitor -d I II III IV V VI VII VIII IX X
+# bspc monitor -d I II III IV V
 
 if [ "$(xrandr | grep HDMI1 | awk '{print $2}')" = "connected" ]; then
 	bspc monitor HDMI1 -n 0 -d I II III IV V
@@ -35,10 +35,10 @@ else
 fi
 
 bspc rule -a Gimp state=floating
-#bspc rule -a Chromium desktop=^2
-#bspc rule -a mplayer2 floating=on
-#bspc rule -a Kupfer.py focus=on
-#bspc rule -a Screenkey manage=off
+# bspc rule -a Chromium desktop=^2
+# bspc rule -a mplayer2 floating=on
+# bspc rule -a Kupfer.py focus=on
+# bspc rule -a Screenkey manage=off
 
-exec xautolock -time 15 -locker 'dm-tool lock' &
+# exec xautolock -time 15 -locker 'dm-tool lock' &
 /home/mark/.panel/panel &
