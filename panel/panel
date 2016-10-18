@@ -38,7 +38,7 @@ while true; do
     sleep 1
 done > "/tmp/panelfifo" &
 
-(sleep 5 && echo -e "UPDATES$(checkupdates | wc -l)") > "/tmp/panelfifo" &
+# (sleep 5 && echo -e "UPDATES$(checkupdates | wc -l)") > "/tmp/panelfifo" &
 
 # this is handled by acpid
 # while true; do
