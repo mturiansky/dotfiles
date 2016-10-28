@@ -40,6 +40,9 @@ setopt NO_HUP
 
 # MISCELLANEOUS OPTIONS
 
+# Borg options
+export BORG_CACHE_DIR=/mnt/borgcache
+
 # GTK2 configuration
 export GTK2_RC_FILES=$HOME/.config/gtkrc-2.0
 
