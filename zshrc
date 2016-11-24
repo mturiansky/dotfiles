@@ -62,6 +62,16 @@ tga () {
 	git add $1
 }
 
+# for when the cat wants to nap on the laptop
+catmode () {
+	aa=$(xinput | grep 'TPPS/2 IBM TrackPoint' | awk '{print $6}' | awk -F= '{print $2}')
+	bb=$(xinput | grep 'SynPS/2 Synaptics TouchPad' | awk '{print $6}' | awk -F= '{print $2}')
+	cc=$(xinput | grep 'AT Translated Set 2 keyboard' | awk '{print $7}' | awk -F= '{print $2}')
+	xinput disable $aa
+	xinput disable $bb
+	xinput float $cc
+}
+
 ## stolen from http://dotshare.it/dots/461/
 extract () {
   if [ -f $1 ] ; then
