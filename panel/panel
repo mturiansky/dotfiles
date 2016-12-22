@@ -61,7 +61,7 @@ xtitle -sf 'TITLE%s' > "/tmp/panelfifo" &
 WIDTH=$(xrandr | grep primary | awk '{print $4}' | awk -Fx '{print $1}')
 width=$(expr $WIDTH - 24)
 
-/home/mark/.panel/panel_bar < "/tmp/panelfifo" | lemonbar \
+/home/mark/.panel/panel_bar < "/tmp/panelfifo" | lemonbar -d \
     -g ${width}x25+12+10 \
     -f "-*-terminus-*-*-*-*-*-*-*-*-*-*-*-*" \
     -f "FontAwesome-8" \
