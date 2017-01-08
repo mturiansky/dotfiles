@@ -1,4 +1,9 @@
+# PATH updates
+export PATH="$PATH:/home/mark/.gem/ruby/2.2.0/bin"
+
+# ----------------------------
 # OH-MY-ZSH SETUP
+# ----------------------------
 
 # oh-my-zsh directory
 export ZSH=/home/mark/.oh-my-zsh
@@ -12,8 +17,6 @@ COMPLETION_WAITING_DOTS="true"
 # oh-my-zsh plugins
 plugins=()
 
-# add ruby to path
-export PATH="$PATH:/home/mark/.gem/ruby/2.2.0/bin"
 
 # change cache dir for oh-my-zsh
 ZSH_CACHE_DIR=$HOME/.cache/.oh-my-zsh-cache
@@ -24,7 +27,9 @@ fi
 # start up oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# ----------------------------
 # ZSH OPTIONS
+# ----------------------------
 
 # allows comments in command line
 setopt INTERACTIVE_COMMENTS
@@ -41,7 +46,9 @@ setopt NO_HUP
 # syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# ----------------------------
 # MISCELLANEOUS OPTIONS
+# ----------------------------
 
 # Borg options
 export BORG_CACHE_DIR=/mnt/borgcache
@@ -57,7 +64,9 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/NewCode
 source /usr/bin/virtualenvwrapper.sh
 
+# ----------------------------
 # HOMEMADE FUNCTIONS
+# ----------------------------
 
 # touch and git add
 tga () {
@@ -67,12 +76,22 @@ tga () {
 
 # for when the cat wants to nap on the laptop
 catmode () {
-	aa=$(xinput | grep 'TPPS/2 IBM TrackPoint' | awk '{print $6}' | awk -F= '{print $2}')
-	bb=$(xinput | grep 'SynPS/2 Synaptics TouchPad' | awk '{print $6}' | awk -F= '{print $2}')
-	cc=$(xinput | grep 'AT Translated Set 2 keyboard' | awk '{print $7}' | awk -F= '{print $2}')
-	xinput disable $aa
-	xinput disable $bb
-	xinput float $cc
+	local trackpoint=$(xinput | grep 'TPPS/2 IBM TrackPoint' | awk '{print $6}' | awk -F= '{print $2}')
+	local touchpad=$(xinput | grep 'SynPS/2 Synaptics TouchPad' | awk '{print $6}' | awk -F= '{print $2}')
+	local keyboard=$(xinput | grep 'AT Translated Set 2 keyboard' | awk '{print $7}' | awk -F= '{print $2}')
+	case $1 in
+		off)
+			local master=$(xinput | grep 'Virtual core keyboard' | awk '{print $5}' | awk -F= '{print $2}')
+			xinput enable $trackpoint
+			xinput enable $touchpad
+			xinput reattach $keyboard $master
+			;;
+		*)
+			xinput disable $trackpoint
+			xinput disable $touchpad
+			xinput float $keyboard
+			;;
+	esac
 }
 
 ## stolen from http://dotshare.it/dots/461/
