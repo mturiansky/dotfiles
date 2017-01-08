@@ -1,7 +1,7 @@
 # OH-MY-ZSH SETUP
 
 # oh-my-zsh directory
-export ZSH=/usr/share/oh-my-zsh
+export ZSH=/home/mark/.oh-my-zsh
 
 # theme found in $ZSH/themes
 ZSH_THEME="af-magic2"
@@ -37,6 +37,9 @@ setopt CORRECT
 
 # gets rid of 'zsh: you have running jobs.'
 setopt NO_HUP
+
+# syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # MISCELLANEOUS OPTIONS
 
