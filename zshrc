@@ -15,7 +15,7 @@ ZSH_THEME="af-magic2"
 COMPLETION_WAITING_DOTS="true"
 
 # oh-my-zsh plugins
-plugins=()
+plugins=(colored-man-pages)
 
 
 # change cache dir for oh-my-zsh
