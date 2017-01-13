@@ -1,4 +1,4 @@
-rofi.font: terminus 12
+rofi.font: xos4 terminus 12
 rofi.lines: 10
 rofi.color-enabled: true
 rofi.color-window: #322e2e, #ff0018, #808080
