@@ -68,7 +68,7 @@ URxvt*foreground: #ffffff
 ! URxvt*borderColor: colour
 
 ! Select the fonts to be used. This is a comma separated list of font names that are checked in order when trying to find glyphs for characters. The first font defines the cell size for characters; other
-URxvt*font: xft:xos4 terminus:size=11,xft:fontawesome:size=1
+URxvt*font: xft:Terminus:size=11,xft:fontawesome:size=1
 
 ! URxvt*boldFont: fontlist
 
