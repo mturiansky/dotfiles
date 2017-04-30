@@ -1,5 +1,5 @@
 # PATH updates
-export PATH="$PATH:/home/mark/.gem/ruby/2.2.0/bin"
+export PATH="$PATH:/home/mark/.gem/ruby/2.4.0/bin"
 
 # ----------------------------
 # OH-MY-ZSH SETUP
@@ -12,7 +12,8 @@ export ZSH=/home/mark/.oh-my-zsh
 ZSH_THEME="af-magic2"
 
 # dots while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# Commented out since it eats lines until ZSH 5.3.2 fixes
+# COMPLETION_WAITING_DOTS="true"
 
 # oh-my-zsh plugins
 plugins=(colored-man-pages)
@@ -120,4 +121,4 @@ extract () {
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
-alias octave="octave --no-gui -q"
+alias octave="octave-cli --no-gui -q"
