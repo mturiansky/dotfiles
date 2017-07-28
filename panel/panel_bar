@@ -78,8 +78,7 @@ while read -r line; do
             ;;
         BRIGHT*)
             BR=${line#??????}
-            BRI=$(expr $BR / 10)
-            bright=" ${BRI} \uf185 "
+            bright=" ${BR} \uf185 "
             ;;
         VOL)
             pct=$(amixer get Master | tail -n 1 | awk '{print $4}')

@@ -27,16 +27,16 @@ while true; do
 done > "/tmp/panelfifo" &
 
 while true; do
-    WIFI=$(ip addr show wlp0s20u3 | grep "inet " | awk '{print $2}')
+    WIFI=$(ip addr show wlp5s0 | grep "inet " | awk '{print $2}')
     echo -e "WIFI${WIFI}"
     sleep 3
 done > "/tmp/panelfifo" &
 
-while true; do
-    PRINTQ=$(lpstat -u | wc -l)
-    echo -e "PRINT${PRINTQ}"
-    sleep 1
-done > "/tmp/panelfifo" &
+# while true; do
+#     PRINTQ=$(lpstat -u | wc -l)
+#     echo -e "PRINT${PRINTQ}"
+#     sleep 1
+# done > "/tmp/panelfifo" &
 
 # (sleep 5 && echo -e "UPDATES$(checkupdates | wc -l)") > "/tmp/panelfifo" &
 
@@ -48,7 +48,8 @@ done > "/tmp/panelfifo" &
 # done > "/tmp/panelfifo" &
 
 # just need to call it once
-BRIGHT=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+acbr=$(expr $(cat /sys/class/backlight/intel_backlight/actual_brightness) \* 100)
+BRIGHT=$(expr $acbr / $(cat /sys/class/backlight/intel_backlight/max_brightness))
 echo -e "BRIGHT${BRIGHT}" > "/tmp/panelfifo" &
 
 echo -e "VOL" > "/tmp/panelfifo" &
@@ -56,7 +57,7 @@ echo -e "VOL" > "/tmp/panelfifo" &
 # bspc control --subscribe > "/tmp/panelfifo" &
 bspc subscribe report > "/tmp/panelfifo" &
 
-xtitle -sf 'TITLE%s' > "/tmp/panelfifo" &
+xtitle -sf 'TITLE%s\n' > "/tmp/panelfifo" &
 
 WIDTH=$(xrandr | grep primary | awk '{print $4}' | awk -Fx '{print $1}')
 width=$(expr $WIDTH - 24)

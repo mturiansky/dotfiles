@@ -25,13 +25,13 @@ bspc config active_border_color \#aa1111
 # bspc monitor -d I II III IV V VI VII VIII IX X
 # bspc monitor -d I II III IV V
 
-if [ "$(xrandr | grep HDMI1 | awk '{print $2}')" = "connected" ]; then
-	bspc monitor HDMI1 -n 0 -d I II III IV V
-	bspc monitor LVDS1 -n 1 -d VI VII
+if [ "$(xrandr | grep HDMI-1 | awk '{print $2}')" = "connected" ]; then
+	bspc monitor HDMI-1 -n 0 -d I II III IV V
+	bspc monitor eDP-1 -n 1 -d VI VII
 
 	bspc config -m 1 top_padding 0
 else
-	bspc monitor LVDS1 -n 0 -d I II III IV V
+	bspc monitor eDP-1 -n 0 -d I II III IV V
 fi
 
 bspc rule -a Gimp state=floating
