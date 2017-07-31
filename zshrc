@@ -62,8 +62,15 @@ source /etc/profile.d/jre.sh
 
 # virtualenv-wrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/NewCode
+export PROJECT_HOME=$HOME/Documents/code
 source /usr/bin/virtualenvwrapper.sh
+
+# editor
+export EDITOR=vim
+export SUDO_EDITOR=vim
+
+# misc
+export TERM='xterm-256color'
 
 # ----------------------------
 # HOMEMADE FUNCTIONS
@@ -117,7 +124,14 @@ extract () {
   fi
 }
 
+_pmg () {
+    workon pmg
+    pmg $@
+    deactivate
+}
+
 # HOMEMADE ALIASES
+alias pmg=_pmg
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
