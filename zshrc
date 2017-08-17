@@ -69,6 +69,17 @@ source /usr/bin/virtualenvwrapper.sh
 export EDITOR=vim
 export SUDO_EDITOR=vim
 
+# ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null
+then
+    ssh-agent > ~/.cache/ssh-agent-env
+fi
+
+if [[ "$SSH_AGENT_PID" == "" ]]
+then
+    eval "$(cat ~/.cache/ssh-agent-env)" > /dev/null
+fi
+
 # misc
 export TERM='xterm-256color'
 
@@ -128,6 +139,10 @@ _pmg () {
     workon pmg
     pmg $@
     deactivate
+}
+
+backup () {
+    borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
 }
 
 # HOMEMADE ALIASES

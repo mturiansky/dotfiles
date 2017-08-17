@@ -25,16 +25,19 @@ bspc config active_border_color \#aa1111
 # bspc monitor -d I II III IV V VI VII VIII IX X
 # bspc monitor -d I II III IV V
 
-if [ "$(xrandr | grep HDMI-1 | awk '{print $2}')" = "connected" ]; then
-	bspc monitor HDMI-1 -n 0 -d I II III IV V
-	bspc monitor eDP-1 -n 1 -d VI VII
+# if [ "$(xrandr | grep HDMI-1 | awk '{print $2}')" = "connected" ]; then
+# 	bspc monitor HDMI-1 -n 0 -d I II III IV V
+# 	bspc monitor eDP-1 -n 1 -d VI VII
+# 
+# 	bspc config -m 1 top_padding 0
+# else
+# 	bspc monitor eDP-1 -n 0 -d I II III IV V
+# fi
 
-	bspc config -m 1 top_padding 0
-else
-	bspc monitor eDP-1 -n 0 -d I II III IV V
-fi
+bspc monitor eDP-1 -n 0 -d I II III IV V
 
 bspc rule -a Gimp state=floating
+bspc rule -a Thunderbird:Msgcompose state=floating
 # bspc rule -a Chromium desktop=^2
 # bspc rule -a mplayer2 floating=on
 # bspc rule -a Kupfer.py focus=on
