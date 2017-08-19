@@ -1,5 +1,5 @@
 # PATH updates
-export PATH="$PATH:/home/mark/.gem/ruby/2.4.0/bin"
+export PATH="$PATH:/home/mark/.gem/ruby/2.4.0/bin:/usr/local/pulse"
 
 # ----------------------------
 # OH-MY-ZSH SETUP
@@ -150,4 +150,5 @@ alias pmg=_pmg
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
+alias ucsbvpn="sudo pulsesvc -C -h ps.vpn.ucsb.edu -u mturiansky -r \"UCSB-Remote-Access\" -U \"https://ps.vpn.ucsb.edu/ra\""
 alias octave="octave-cli --no-gui -q"
