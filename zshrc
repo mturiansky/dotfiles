@@ -1,5 +1,6 @@
 # PATH updates
-export PATH="$PATH:/home/mark/.gem/ruby/2.4.0/bin:/usr/local/pulse"
+export PATH="$PATH:/usr/local/pulse"
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 # ----------------------------
 # OH-MY-ZSH SETUP
