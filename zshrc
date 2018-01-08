@@ -142,12 +142,55 @@ _pmg () {
     deactivate
 }
 
+_phonopy () {
+    workon phonopy
+    phonopy $@
+    deactivate
+}
+
 backup () {
     borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
 }
 
+lmnt () {
+    pushd /home/mark >> /dev/null
+    case $1 in
+        cori)
+            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
+            ;;
+        guild)
+            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild
+            ;;
+        knot)
+            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot
+            ;;
+        comet)
+            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet
+            ;;
+        braid)
+            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
+            ;;
+        all)
+            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
+            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild
+            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot
+            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet
+            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
+            ;;
+        unmount)
+            fusermount -u lmnt/cori
+            fusermount -u lmnt/guild
+            fusermount -u lmnt/knot
+            fusermount -u lmnt/comet
+            fusermount -u lmnt/braid
+            ;;
+    esac
+    popd >> /dev/null
+}
+
 # HOMEMADE ALIASES
 alias pmg=_pmg
+alias phonopy=_phonopy
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
