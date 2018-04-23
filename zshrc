@@ -60,6 +60,7 @@ export GTK2_RC_FILES=$HOME/.config/gtkrc-2.0
 
 # for java dependencies
 source /etc/profile.d/jre.sh
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # virtualenv-wrapper
 export WORKON_HOME=$HOME/.virtualenvs
