@@ -138,7 +138,7 @@ extract () {
 }
 
 _pmg () {
-    workon pmg
+    workon pymatgen
     pmg $@
     deactivate
 }
@@ -149,7 +149,14 @@ _phonopy () {
     deactivate
 }
 
+_va () {
+    workon vasp_assistant
+    va $@
+    deactivate
+}
+
 backup () {
+    pacman -Qqe > /home/mark/Documents/personal/pkglist.txt
     borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
 }
 
@@ -171,12 +178,24 @@ lmnt () {
         braid)
             sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
             ;;
+        bridges)
+            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges
+            ;;
+        pod)
+            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
+            ;;
+        stampede2)
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2
+            ;;
         all)
             sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
             sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild
             sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot
             sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet
             sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
+            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges
+            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2
             ;;
         unmount)
             fusermount -u lmnt/cori
@@ -184,6 +203,9 @@ lmnt () {
             fusermount -u lmnt/knot
             fusermount -u lmnt/comet
             fusermount -u lmnt/braid
+            fusermount -u lmnt/bridges
+            fusermount -u lmnt/pod
+            fusermount -u lmnt/stampede2
             ;;
     esac
     popd >> /dev/null
@@ -192,8 +214,9 @@ lmnt () {
 # HOMEMADE ALIASES
 alias pmg=_pmg
 alias phonopy=_phonopy
+alias va=_va
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
-alias ucsbvpn="sudo pulsesvc -C -h ps.vpn.ucsb.edu -u mturiansky -r \"UCSB-Remote-Access\" -U \"https://ps.vpn.ucsb.edu/ra\""
+alias ucsbvpn="sudo pulsesvc -C -h ps.vpn.ucsb.edu -u mturiansky -r \"Remote-Access\" -U \"https://ps.vpn.ucsb.edu/ra\""
 alias octave="octave-cli --no-gui -q"
