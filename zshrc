@@ -184,8 +184,11 @@ lmnt () {
         pod)
             sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
             ;;
-        stampede2)
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2
+        stampede2_scratch)
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch
+            ;;
+        stampede2_work)
+            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work
             ;;
         all)
             sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
@@ -195,7 +198,8 @@ lmnt () {
             sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
             sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges
             sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch
+            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work
             ;;
         unmount)
             fusermount -u lmnt/cori
@@ -205,7 +209,8 @@ lmnt () {
             fusermount -u lmnt/braid
             fusermount -u lmnt/bridges
             fusermount -u lmnt/pod
-            fusermount -u lmnt/stampede2
+            fusermount -u lmnt/stampede2/scratch
+            fusermount -u lmnt/stampede2/work
             ;;
     esac
     popd >> /dev/null

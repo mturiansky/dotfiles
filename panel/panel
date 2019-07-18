@@ -8,7 +8,7 @@ fi
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 [ -e "/tmp/panelfifo" ] && rm "/tmp/panelfifo"
-mkfifo "/tmp/panelfifo"
+mkfifo -m0766 "/tmp/panelfifo"
 
 while true; do
     echo -e "TIME$(date +"%_H:%M")"
