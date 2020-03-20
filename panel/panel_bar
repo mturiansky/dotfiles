@@ -81,7 +81,7 @@ while read -r line; do
             bright=" ${BR} \uf185 "
             ;;
         VOL)
-            pct=$(amixer get Master | tail -n 1 | awk '{print $4}')
+            pct=$(amixer get Master | tail -n 1 | awk '{print $5}')
             pct=${pct#?}
             pct=${pct%??}
             mute=$(amixer get Master | tail -n 1 | awk '{print $6}')

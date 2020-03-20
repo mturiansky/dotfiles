@@ -2,13 +2,15 @@
 # wm independent hotkeys
 #
 
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
 # terminal emulator
 super + Return
 	urxvt
 
 # program launcher
-# super + space
-	# dmenu_run -sb 'dark red' -i -h 25 -w 1342 -x 12 -y 10 -dim 0.6
 super + {_,shift + }space
 	rofi -modi run,calc,window -combi-modi run,calc,window -show {run,calc}
 
@@ -18,9 +20,15 @@ alt + Tab
 alt + Escape
 	dm-tool lock
 
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
+# handle volume
+XF86AudioMute
+    amixer -D pulse set Master toggle && if [ -e "/tmp/panelfifo" ]; then echo "VOL" > "/tmp/panelfifo"; fi
+
+XF86AudioLowerVolume
+    amixer -D pulse set Master 3%- && if [ -e "/tmp/panelfifo" ]; then echo "VOL" > "/tmp/panelfifo"; fi
+
+XF86AudioRaiseVolume
+    amixer -D pulse set Master 3%+ && if [ -e "/tmp/panelfifo" ]; then echo "VOL" > "/tmp/panelfifo"; fi
 
 #
 # bspwm hotkeys
