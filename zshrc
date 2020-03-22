@@ -42,8 +42,13 @@ setopt CORRECT
 # correction for commands and arguments
 # setopt CORRECT_ALL
 
+# I think this goes with NO_HUP?
+setopt NO_BG_NICE
 # gets rid of 'zsh: you have running jobs.'
 setopt NO_HUP
+
+# annoying beep in terminal
+unsetopt BEEP
 
 # syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
