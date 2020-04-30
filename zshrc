@@ -169,42 +169,42 @@ lmnt () {
     pushd /home/mark >> /dev/null
     case $1 in
         cori)
-            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
+            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori -o idmap=user
             ;;
         guild)
-            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild
+            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild -o idmap=user
             ;;
         knot)
-            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot
+            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot -o idmap=user
             ;;
         comet)
-            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet
+            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet -o idmap=user
             ;;
         braid)
-            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
+            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid -o idmap=user
             ;;
         bridges)
-            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges
+            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges -o idmap=user
             ;;
         pod)
-            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
+            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod -o idmap=user
             ;;
         stampede2_scratch)
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch -o idmap=user
             ;;
         stampede2_work)
-            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work
+            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
             ;;
         all)
-            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori
-            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild
-            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot
-            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet
-            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid
-            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges
-            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch
-            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work
+            sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori -o idmap=user
+            sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild -o idmap=user
+            sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot -o idmap=user
+            sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet -o idmap=user
+            sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid -o idmap=user
+            sshfs mtur@bridges.psc.edu:/home/mtur/ lmnt/bridges -o idmap=user
+            sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod -o idmap=user
+            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch -o idmap=user
+            sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
             ;;
         unmount)
             fusermount -u lmnt/cori
