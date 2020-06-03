@@ -228,5 +228,6 @@ alias va=_va
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"
-alias ucsbvpn="sudo pulsesvc -C -h ps.vpn.ucsb.edu -u mturiansky -r \"Remote-Access\" -U \"https://ps.vpn.ucsb.edu/ra\""
+# alias ucsbvpn="sudo pulsesvc -C -h ps.vpn.ucsb.edu -u mturiansky -r \"Remote-Access\" -U \"https://ps.vpn.ucsb.edu/ra\""
+alias ucsbvpn="sudo openconnect --protocol=pulse -u mturiansky https://ps.vpn.ucsb.edu/ra"
 alias octave="octave-cli --no-gui -q"
