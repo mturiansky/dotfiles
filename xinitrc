@@ -43,7 +43,7 @@ sxhkd &
 urxvtd -q -f -o &
 xsetroot -cursor_name left_ptr &
 xset -b &
-compton &
+picom &
 
 # if [ "$(xrandr | grep HDMI-1 | awk '{print $2}')" = "connected" ]; then
 # 	xrandr --output eDP-1 --auto

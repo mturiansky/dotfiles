@@ -1,0 +1,8 @@
+configuration {
+	lines: 10;
+	font: "xos4 Terminus 12";
+	color-normal: "#322e2e, #ffffff, #3c3838, #aa1111, #ffffff";
+	color-urgent: "#322e2e, #22e21f, #3c3838, #22e21f, #ffffff";
+	color-active: "#322e2e, #268bd2, #3c3838, #268bd2, #ffffff";
+	color-window: "#322e2e, #ff0018, #808080";
+}

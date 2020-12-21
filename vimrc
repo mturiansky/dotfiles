@@ -472,9 +472,8 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
 augroup END
 
-
-" php
-
+" fortran
+autocmd FileType fortran setlocal expandtab shiftwidth=2 tabstop=2 colorcolumn=79
 
 " python
 " vim-python
