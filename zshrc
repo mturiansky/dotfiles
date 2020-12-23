@@ -165,6 +165,10 @@ backup () {
     borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
 }
 
+lmnt_comp () {
+    reply=(cori guild knot comet braid bridges pod stampede2_scratch stampede2_work all unmount)
+}
+
 lmnt () {
     pushd /home/mark >> /dev/null
     case $1 in
@@ -220,6 +224,8 @@ lmnt () {
     esac
     popd >> /dev/null
 }
+
+compctl -K lmnt_comp lmnt
 
 # HOMEMADE ALIASES
 alias pmg=_pmg
