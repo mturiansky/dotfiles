@@ -166,7 +166,7 @@ backup () {
 }
 
 lmnt_comp () {
-    reply=(cori guild knot comet braid bridges pod stampede2_scratch stampede2_work all unmount)
+    reply=(cori guild knot comet braid bridges pod stampede2_scratch stampede2_work expanse all unmount)
 }
 
 lmnt () {
@@ -199,6 +199,9 @@ lmnt () {
         stampede2_work)
             sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
             ;;
+        expanse)
+            sshfs mtur@login.expanse.sdsc.edu:/expanse/lustre/scratch/mtur/temp_project lmnt/expanse -o idmap=user
+            ;;
         all)
             sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori -o idmap=user
             sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild -o idmap=user
@@ -209,6 +212,7 @@ lmnt () {
             sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod -o idmap=user
             sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch -o idmap=user
             sshfs mturians@stampede2.tacc.utexas.edu:/work/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
+            sshfs mtur@login.expanse.sdsc.edu:/expanse/lustre/scratch/mtur/temp_project lmnt/expanse -o idmap=user
             ;;
         unmount)
             fusermount -u lmnt/cori
@@ -220,6 +224,7 @@ lmnt () {
             fusermount -u lmnt/pod
             fusermount -u lmnt/stampede2/scratch
             fusermount -u lmnt/stampede2/work
+            fusermount -u lmnt/expanse
             ;;
     esac
     popd >> /dev/null
