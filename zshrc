@@ -162,11 +162,11 @@ _va () {
 
 backup () {
     pacman -Qqe > /home/mark/Documents/personal/pkglist.txt
-    borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
+    borg create -v -s -p -C zlib,6 --exclude /home/mark/.cache --exclude /home/mark/.config/Slack --exclude /home/mark/.config/BraveSoftware --exclude /home/mark/.virtualenvs --exclude /home/mark/.cargo /mnt/backup-arch::archlinux-mark-$(date -Iminutes) ~
 }
 
 lmnt_comp () {
-    reply=(cori guild knot comet braid bridges2 pod stampede2_scratch stampede2_work expanse_scratch expanse_work frontera all unmount)
+    reply=(cori perlmutter guild knot comet braid bridges2 pod stampede2_scratch stampede2_work expanse_scratch expanse_work frontera all unmount)
 }
 
 lmnt () {
@@ -174,6 +174,9 @@ lmnt () {
     case $1 in
         cori)
             sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori -o idmap=user
+            ;;
+        perlmutter)
+            sshfs mtur@perlmutter-p1.nersc.gov:/global/homes/m/mtur/ lmnt/perlmutter -o idmap=user
             ;;
         guild)
             sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild -o idmap=user
@@ -210,6 +213,7 @@ lmnt () {
             ;;
         all)
             sshfs mtur@cori.nersc.gov:/global/homes/m/mtur/ lmnt/cori -o idmap=user
+            sshfs mtur@perlmutter-p1.nersc.gov:/global/homes/m/mtur/ lmnt/perlmutter -o idmap=user
             sshfs mtur@guild.cnsi.ucsb.edu:/home/mtur lmnt/guild -o idmap=user
             sshfs mtur@knot.cnsi.ucsb.edu:/home/mtur/ lmnt/knot -o idmap=user
             sshfs mtur@comet.sdsc.xsede.org:/oasis/scratch/comet/mtur/temp_project/ lmnt/comet -o idmap=user
@@ -224,6 +228,7 @@ lmnt () {
             ;;
         unmount)
             fusermount -u lmnt/cori
+            fusermount -u lmnt/perlmutter
             fusermount -u lmnt/guild
             fusermount -u lmnt/knot
             fusermount -u lmnt/comet
