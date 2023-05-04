@@ -64,17 +64,13 @@ export BORG_CACHE_DIR=/mnt/borgcache
 export GTK2_RC_FILES=$HOME/.config/gtkrc-2.0
 
 # for java dependencies
-source /etc/profile.d/jre.sh
+# source /etc/profile.d/jre.sh
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # virtualenv-wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Documents/code
 source /usr/bin/virtualenvwrapper.sh
-
-# editor
-export EDITOR=vim
-export SUDO_EDITOR=vim
 
 # ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null
@@ -151,12 +147,6 @@ _pmg () {
 _phonopy () {
     workon phonopy
     phonopy $@
-    deactivate
-}
-
-_va () {
-    workon vasp_assistant
-    va $@
     deactivate
 }
 
@@ -250,7 +240,7 @@ compctl -K lmnt_comp lmnt
 # HOMEMADE ALIASES
 alias pmg=_pmg
 alias phonopy=_phonopy
-alias va=_va
+alias va="pdm run -p $HOME/Documents/code/vasp_assistant va"
 alias xo=xdg-open
 alias homevpn="sudo openvpn /etc/openvpn/client.conf"
 alias homevpnd="sudo openvpn --daemon --askpass --config /etc/openvpn/client.conf"

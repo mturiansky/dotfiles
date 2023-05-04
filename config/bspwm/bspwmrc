@@ -37,7 +37,7 @@ bspc config active_border_color \#aa1111
 bspc monitor eDP-1 -n 0 -d I II III IV V
 
 bspc rule -a Gimp state=floating
-bspc rule -a Thunderbird:Msgcompose state=floating
+bspc rule -a thunderbird:Msgcompose state=floating
 bspc rule -a KeePassXC:keepassxc sticky=on
 # bspc rule -a Chromium desktop=^2
 # bspc rule -a mplayer2 floating=on
