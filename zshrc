@@ -156,7 +156,7 @@ backup () {
 }
 
 lmnt_comp () {
-    reply=(cori perlmutter guild knot comet braid bridges2 pod stampede2_scratch stampede2_work expanse_scratch expanse_work frontera all unmount)
+    reply=(cori perlmutter guild knot comet braid bridges2 pod braid2 stampede3_scratch stampede3_work expanse_scratch expanse_work frontera all unmount)
 }
 
 lmnt () {
@@ -186,11 +186,14 @@ lmnt () {
         pod)
             sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod -o idmap=user
             ;;
-        stampede2_scratch)
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch -o idmap=user
+        braid2)
+            sshfs mtur@braid2.cnsi.ucsb.edu:/home/mtur lmnt/braid2 -o idmap=user
             ;;
-        stampede2_work)
-            sshfs mturians@stampede2.tacc.utexas.edu:/work2/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
+        stampede3_scratch)
+            sshfs mturians@stampede3.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede3/scratch -o idmap=user
+            ;;
+        stampede3_work)
+            sshfs mturians@stampede3.tacc.utexas.edu:/work2/05031/mturians/stampede3 lmnt/stampede3/work -o idmap=user
             ;;
         expanse_scratch)
             sshfs mtur@login.expanse.sdsc.edu:/expanse/lustre/scratch/mtur/temp_project lmnt/expanse/scratch -o idmap=user
@@ -210,8 +213,9 @@ lmnt () {
             sshfs mtur@braid.cnsi.ucsb.edu:/home/mtur/ lmnt/braid -o idmap=user
             sshfs mtur@bridges2.psc.edu:/jet/home/mtur/ lmnt/bridges2 -o idmap=user
             sshfs mtur@pod-login1.cnsi.ucsb.edu:/home/mtur lmnt/pod -o idmap=user
-            sshfs mturians@stampede2.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede2/scratch -o idmap=user
-            sshfs mturians@stampede2.tacc.utexas.edu:/work2/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
+            sshfs mtur@braid2.cnsi.ucsb.edu:/home/mtur lmnt/braid2 -o idmap=user
+            sshfs mturians@stampede3.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede3/scratch -o idmap=user
+            sshfs mturians@stampede3.tacc.utexas.edu:/work2/05031/mturians/stampede3 lmnt/stampede3/work -o idmap=user
             sshfs mtur@login.expanse.sdsc.edu:/expanse/lustre/scratch/mtur/temp_project lmnt/expanse/scratch -o idmap=user
             sshfs mtur@login.expanse.sdsc.edu:/expanse/lustre/projects/csb109/mtur lmnt/expanse/work -o idmap=user
             sshfs mturians@frontera.tacc.utexas.edu:/home1/05031/mturians lmnt/frontera -o idmap=user
@@ -225,8 +229,9 @@ lmnt () {
             fusermount -u lmnt/braid
             fusermount -u lmnt/bridges2
             fusermount -u lmnt/pod
-            fusermount -u lmnt/stampede2/scratch
-            fusermount -u lmnt/stampede2/work
+            fusermount -u lmnt/braid2
+            fusermount -u lmnt/stampede3/scratch
+            fusermount -u lmnt/stampede3/work
             fusermount -u lmnt/expanse/scratch
             fusermount -u lmnt/expanse/work
             fusermount -u lmnt/frontera

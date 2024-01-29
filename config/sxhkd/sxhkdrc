@@ -30,6 +30,10 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
     amixer -D pulse set Master 3%+ && if [ -e "/tmp/panelfifo" ]; then echo "VOL" > "/tmp/panelfifo"; fi
 
+# reload screens
+XF86Display
+    sudo systemctl restart myhdmiplug.service
+
 #
 # bspwm hotkeys
 #
