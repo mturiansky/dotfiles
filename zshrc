@@ -156,7 +156,7 @@ backup () {
 }
 
 lmnt_comp () {
-    reply=(cori perlmutter guild knot comet braid bridges2 pod braid2 stampede3_scratch stampede3_work expanse_scratch expanse_work frontera all unmount)
+    reply=(cori perlmutter guild knot comet braid bridges2 pod braid2 stampede2_work stampede3_scratch stampede3_work expanse_scratch expanse_work frontera all unmount)
 }
 
 lmnt () {
@@ -188,6 +188,9 @@ lmnt () {
             ;;
         braid2)
             sshfs mtur@braid2.cnsi.ucsb.edu:/home/mtur lmnt/braid2 -o idmap=user
+            ;;
+        stampede2_work)
+            sshfs mturians@stampede3.tacc.utexas.edu:/work2/05031/mturians/stampede2 lmnt/stampede2/work -o idmap=user
             ;;
         stampede3_scratch)
             sshfs mturians@stampede3.tacc.utexas.edu:/scratch/05031/mturians lmnt/stampede3/scratch -o idmap=user
@@ -230,6 +233,7 @@ lmnt () {
             fusermount -u lmnt/bridges2
             fusermount -u lmnt/pod
             fusermount -u lmnt/braid2
+            fusermount -u lmnt/stampede2/work
             fusermount -u lmnt/stampede3/scratch
             fusermount -u lmnt/stampede3/work
             fusermount -u lmnt/expanse/scratch
