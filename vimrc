@@ -492,6 +492,7 @@ let g:jedi#smart_auto_mappings = 0
 " ale
 let g:ale_linters = {
 \   'python': ['ruff', 'mypy'],
+\   'tex': ['lacheck', 'alex', 'proselint'],
 \}
 let g:ale_echo_msg_format = '[%linter%] %severity%: %s'
 
