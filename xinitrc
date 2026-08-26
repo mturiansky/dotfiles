@@ -45,6 +45,8 @@ xsetroot -cursor_name left_ptr &
 xset -b &
 picom &
 
+xinput -set-prop 25 348 -0.5
+
 # if [ "$(xrandr | grep HDMI-1 | awk '{print $2}')" = "connected" ]; then
 # 	xrandr --output eDP-1 --auto
 # 	xrandr --output HDMI-1 --auto --left-of LVDS1 --primary
